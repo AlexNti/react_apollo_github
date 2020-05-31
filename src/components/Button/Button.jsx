@@ -23,8 +23,8 @@ const BaseButton = styled('button')(
 
     appearance: 'none',
     background: 'inherit',
-    border: '1px solid #DCDCDC',
-    borderRadius: '5px',
+    border: '0',
+    borderRadius: '0',
     color: 'inherit',
     cursor: 'pointer',
     fontFamily: 'inherit',
@@ -41,31 +41,24 @@ const BaseButton = styled('button')(
     : { width, height }),
 );
 
-const StyledButton = styled(BaseButton)(({
-  disabled,
-}) => ({
-  backgroundImage: 'linear-gradient(to right, #61a9ea 0, #407aad 100%)',
-  ':active': {
-    boxShadow: disabled ? undefined : 'rgba(0,0,0,.2) 0px 3px 5px -1px, rgba(0,0,0,.14) 0px 5px 8px 0px, rgba(0,0,0,.12) 0px 1px 14px 0px',
-  },
-}));
 
-const Button = ({
-  onClick, children, height, width,
+const ButtonRoot = ({
+  onClick, children, height, width, ...props
 }) => (
-  <StyledButton onClick={onClick} height={height} width={width}>
+  // eslint-disable-next-line react/jsx-props-no-spreading
+  <BaseButton {...props} onClick={onClick} height={height} width={width}>
     {children}
-  </StyledButton>
+  </BaseButton>
 );
 
 
-Button.defaultProps = {
+ButtonRoot.defaultProps = {
   height: '50px',
   width: '100px',
 
 };
 
-Button.propTypes = {
+ButtonRoot.propTypes = {
   onClick: PropTypes.func.isRequired,
   children: PropTypes.node.isRequired,
   height: PropTypes.string,
@@ -74,4 +67,4 @@ Button.propTypes = {
 
 };
 
-export default Button;
+export default ButtonRoot;

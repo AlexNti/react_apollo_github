@@ -21,11 +21,12 @@ const Header = styled('div')({
 const Tabs = styled('div')({
   display: 'flex',
   width: '100%',
-  height: '100px',
+  height: '120px',
   alignSelf: 'center',
   flexDirection: 'row',
   backgroundColor: 'white',
   boxShadow: '2px 4px 5px 0px rgba(0,0,0,0.75)',
+  boxSizing: 'border-box',
 
 });
 // TODO CREATE JSON OBJECT WITH CURRENT TABS
@@ -35,9 +36,9 @@ const Main = () => {
     <Layout>
       <Header><AccessTokenAndRepoForm /></Header>
       <Tabs>
-        <TabItem selectedTabId={selectedTab} name="Issues" id={1}>ciao</TabItem>
-        <TabItem selectedTabId={selectedTab} name="Pull Request" id={2}>Hello</TabItem>
-        <TabItem selectedTabId={selectedTab} name="Forks" id={3}>bye</TabItem>
+        <TabItem selectedTabId={selectedTab} name="Issues" id={1} onClick={setSelectedTab} />
+        <TabItem selectedTabId={selectedTab} name="Pull Request" id={2} onClick={setSelectedTab} />
+        <TabItem selectedTabId={selectedTab} name="Forks" id={3} onClick={setSelectedTab} />
       </Tabs>
     </Layout>
   );
