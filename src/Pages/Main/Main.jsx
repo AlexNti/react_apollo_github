@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import styled from '@emotion/styled';
 import { Switch, Route } from 'react-router-dom';
 
@@ -41,16 +41,17 @@ const GitHubContent = styled('div')({
 
 // TODO CREATE JSON OBJECT WITH CURRENT TABS
 const Main = () => {
-  const router = useRouter();
-  const [selectedTab, setSelectedTab] = React.useState(1);
-  console.log(router);
+  const { history } = useRouter();
+  const [selectedTab, setSelectedTab] = React.useState('issues');
+
+  useEffect(() => { history.push(`/${selectedTab}`); }, [selectedTab]);
   return (
     <Layout>
       <Header><AccessTokenAndRepoForm /></Header>
       <Tabs>
-        <TabItem selectedTabId={selectedTab} tabName="Issues" id={1} onClick={setSelectedTab} />
-        <TabItem selectedTabId={selectedTab} tabName="Pull Request" id={2} onClick={setSelectedTab} />
-        <TabItem selectedTabId={selectedTab} tabName="Forks" id={3} onClick={setSelectedTab} />
+        <TabItem selectedTabId={selectedTab} tabName="Issues" id="issues" onClick={setSelectedTab} />
+        <TabItem selectedTabId={selectedTab} tabName="Pull Request" id="pullrequests" onClick={setSelectedTab} />
+        <TabItem selectedTabId={selectedTab} tabName="Forks" id="forks" onClick={setSelectedTab} />
       </Tabs>
       <GitHubContent>
         <Switch><Route path="/issues" component={IssuesPage} /></Switch>

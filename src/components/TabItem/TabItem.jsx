@@ -87,7 +87,7 @@ TabItem.defaultProps = {
 
 
 TabItem.propTypes = {
-  id: PropTypes.number.isRequired,
+  id: PropTypes.string.isRequired,
   selectedTabId: PropTypes.number.isRequired,
   tabName: PropTypes.string.isRequired,
   onClick: PropTypes.func.isRequired,
