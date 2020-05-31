@@ -36,9 +36,9 @@ const Main = () => {
     <Layout>
       <Header><AccessTokenAndRepoForm /></Header>
       <Tabs>
-        <TabItem selectedTabId={selectedTab} name="Issues" id={1} onClick={setSelectedTab} />
-        <TabItem selectedTabId={selectedTab} name="Pull Request" id={2} onClick={setSelectedTab} />
-        <TabItem selectedTabId={selectedTab} name="Forks" id={3} onClick={setSelectedTab} />
+        <TabItem selectedTabId={selectedTab} tabName="Issues" id={1} onClick={setSelectedTab} />
+        <TabItem selectedTabId={selectedTab} tabName="Pull Request" id={2} onClick={setSelectedTab} />
+        <TabItem selectedTabId={selectedTab} tabName="Forks" id={3} onClick={setSelectedTab} />
       </Tabs>
     </Layout>
   );

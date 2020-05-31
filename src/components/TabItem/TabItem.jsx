@@ -97,4 +97,4 @@ TabItem.propTypes = {
 };
 
 
-export default TabItem;
+export default React.memo(TabItem);
