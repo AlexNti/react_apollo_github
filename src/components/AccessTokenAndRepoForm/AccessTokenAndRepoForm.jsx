@@ -37,13 +37,12 @@ const AccessTokenAndRepoForm = () => {
 
   const onSubmit = (event) => {
     event.preventDefault();
-    console.log('clicked');
   };
 
   const handleInputChange = React.useCallback((event) => {
     const { name, value } = event.target;
     setValues({ ...values, [name]: value });
-  }, [values.repo, values.accessToken]);
+  }, [values]);
 
   return (
     <Form onSubmit={onSubmit}>

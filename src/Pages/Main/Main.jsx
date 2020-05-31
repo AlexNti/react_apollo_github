@@ -1,8 +1,12 @@
 import React from 'react';
 import styled from '@emotion/styled';
+import { Switch, Route } from 'react-router-dom';
+
 
 import AccessTokenAndRepoForm from '../../components/AccessTokenAndRepoForm';
 import TabItem from '../../components/TabItem';
+
+import IssuesPage from '../Issues';
 
 const Layout = styled('div')({
   display: 'flex',
@@ -15,7 +19,7 @@ const Layout = styled('div')({
 const Header = styled('div')({
   display: 'flex',
   flexDirection: 'row',
-  height: '200px',
+  height: '130px',
 });
 
 const Tabs = styled('div')({
@@ -27,8 +31,15 @@ const Tabs = styled('div')({
   backgroundColor: 'white',
   boxShadow: '2px 4px 5px 0px rgba(0,0,0,0.75)',
   boxSizing: 'border-box',
-
 });
+
+const GitHubContent = styled('div')({
+  display: 'flex',
+  width: '100%',
+  flexDirection: 'column',
+  marginTop: '20px',
+});
+
 // TODO CREATE JSON OBJECT WITH CURRENT TABS
 const Main = () => {
   const [selectedTab, setSelectedTab] = React.useState(1);
@@ -40,6 +51,9 @@ const Main = () => {
         <TabItem selectedTabId={selectedTab} tabName="Pull Request" id={2} onClick={setSelectedTab} />
         <TabItem selectedTabId={selectedTab} tabName="Forks" id={3} onClick={setSelectedTab} />
       </Tabs>
+      <GitHubContent>
+        <Switch><Route path="/issues" component={IssuesPage} /></Switch>
+      </GitHubContent>
     </Layout>
   );
 };
