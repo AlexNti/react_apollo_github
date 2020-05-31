@@ -21,27 +21,32 @@ const FieldsWpapper = styled('div')({
 });
 
 const AccessTokenAndRepoForm = () => {
-  const [repofieldValue, setRepofieldValue] = React.useState('');
-  const [accessTokenValue, setAccessTokenValue] = React.useState('');
+  const [values, setValues] = React.useState({ repo: '', accessToken: '' });
 
-  const onSubmit = React.useCallback((e) => {
-    e.preventDefault();
+
+  const onSubmit = (event) => {
+    event.preventDefault();
     console.log('clicked');
-  });
+  };
+
+  const handleInputChange = React.useCallback((event) => {
+    const { name, value } = event.target;
+    setValues({ ...values, [name]: value });
+  }, [values.repo, values.accessToken]);
 
   return (
     <Form onSubmit={onSubmit}>
       <FieldsWpapper>
         <RepoField
           name="repo"
-          value={repofieldValue}
-          onChange={(e) => setRepofieldValue(e.target.value)}
+          value={values.repo}
+          onChange={(event) => handleInputChange(event)}
           placeholder="Repo Name"
         />
         <AccessTokenField
-          name="AccessToken"
-          value={accessTokenValue}
-          onChange={(e) => setAccessTokenValue(e.target.value)}
+          name="accessToken"
+          value={values.accessToken}
+          onChange={(event) => handleInputChange(event)}
           placeholder="Access Token"
         />
       </FieldsWpapper>

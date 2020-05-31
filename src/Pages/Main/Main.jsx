@@ -17,11 +17,19 @@ const Header = styled('div')({
   height: '200px',
 });
 
-const Tabs = styled('div');
+const Tabs = styled('div')({
+  display: 'flex',
+  width: '100%',
+  height: '150px',
+  alignSelf: 'center',
+  flexDirection: 'row',
+  backgroundColor: 'white',
+});
 
 const Main = () => (
   <Layout>
     <Header><AccessTokenAndRepoForm /></Header>
+    <Tabs />
   </Layout>
 );
 
