@@ -1,9 +1,12 @@
 import React from 'react';
 import styled from '@emotion/styled';
+import { useLazyQuery } from '@apollo/client';
 
 import RepoField from './RepoField';
 import AccessTokenField from './AccessTokenField';
 import Button from '../Button';
+import GET_REPO_INFO from '../../operations/queries/getRepoInfo';
+
 
 const Form = styled('form')({
   display: 'flex',
@@ -32,17 +35,24 @@ const SubmitButton = styled(Button)(({
 }));
 
 const AccessTokenAndRepoForm = () => {
-  const [values, setValues] = React.useState({ repo: '', accessToken: '' });
+  const [getRepoInfo, { loading, data }] = useLazyQuery(GET_REPO_INFO);
+  const [values, setValues] = React.useState({ repo: 'facebook/react', accessToken: 'b6d61ab06aa8c96347d760400c9ee390ad2c8a48' });
 
 
   const onSubmit = (event) => {
     event.preventDefault();
+    console.log('called');
+    getRepoInfo({ variables: { name: 'react', owner: 'facebook' } });
   };
 
   const handleInputChange = React.useCallback((event) => {
     const { name, value } = event.target;
     setValues({ ...values, [name]: value });
   }, [values]);
+
+  if (data) {
+    console.log(data);
+  }
 
   return (
     <Form onSubmit={onSubmit}>
