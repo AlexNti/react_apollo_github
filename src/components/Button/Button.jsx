@@ -55,11 +55,12 @@ const ButtonRoot = ({
 ButtonRoot.defaultProps = {
   height: '50px',
   width: '100px',
+  onClick: () => {},
 
 };
 
 ButtonRoot.propTypes = {
-  onClick: PropTypes.func.isRequired,
+  onClick: PropTypes.func,
   children: PropTypes.node.isRequired,
   height: PropTypes.string,
   width: PropTypes.string,

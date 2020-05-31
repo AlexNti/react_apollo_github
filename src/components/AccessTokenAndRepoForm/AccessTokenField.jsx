@@ -24,7 +24,7 @@ AccessTokenField.defaultProps = {
 
 AccessTokenField.propTypes = {
   name: PropTypes.string.isRequired,
-  error: PropTypes.bool,
+  error: PropTypes.string,
   onChange: PropTypes.func.isRequired,
   placeholder: PropTypes.string,
   value: PropTypes.string,

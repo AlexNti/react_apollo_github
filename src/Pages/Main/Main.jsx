@@ -2,10 +2,9 @@ import React from 'react';
 import styled from '@emotion/styled';
 import { Switch, Route } from 'react-router-dom';
 
-
+import useRouter from '../../hooks/useRouter';
 import AccessTokenAndRepoForm from '../../components/AccessTokenAndRepoForm';
 import TabItem from '../../components/TabItem';
-
 import IssuesPage from '../Issues';
 
 const Layout = styled('div')({
@@ -42,7 +41,9 @@ const GitHubContent = styled('div')({
 
 // TODO CREATE JSON OBJECT WITH CURRENT TABS
 const Main = () => {
+  const router = useRouter();
   const [selectedTab, setSelectedTab] = React.useState(1);
+  console.log(router);
   return (
     <Layout>
       <Header><AccessTokenAndRepoForm /></Header>
