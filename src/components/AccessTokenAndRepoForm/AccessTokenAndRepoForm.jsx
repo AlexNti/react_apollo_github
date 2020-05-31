@@ -7,7 +7,7 @@ import Button from '../Button';
 
 const Form = styled('form')({
   display: 'flex',
-  flexDirection: 'columns',
+  flexDirection: 'column',
   overflow: 'hidden',
   width: '100%',
 });
@@ -17,6 +17,7 @@ const FieldsWpapper = styled('div')({
   flexDirection: 'row',
   overflow: 'hidden',
   width: '100%',
+  marginBottom: '10px',
 });
 
 const AccessTokenAndRepoForm = () => {

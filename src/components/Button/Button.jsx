@@ -23,7 +23,7 @@ const BaseButton = styled('button')(
 
     appearance: 'none',
     background: 'inherit',
-    border: '1px solid black',
+    border: '1px solid #DCDCDC',
     borderRadius: '5px',
     color: 'inherit',
     cursor: 'pointer',
@@ -44,7 +44,7 @@ const BaseButton = styled('button')(
 const StyledButton = styled(BaseButton)(({
   disabled,
 }) => ({
-  backgroundImage: 'linear-gradient(to right, #EA8288 0, #EA82A7 100%)',
+  backgroundImage: 'linear-gradient(to right, #61a9ea 0, #407aad 100%)',
   ':active': {
     boxShadow: disabled ? undefined : 'rgba(0,0,0,.2) 0px 3px 5px -1px, rgba(0,0,0,.14) 0px 5px 8px 0px, rgba(0,0,0,.12) 0px 1px 14px 0px',
   },

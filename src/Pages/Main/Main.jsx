@@ -8,6 +8,7 @@ const Layout = styled('div')({
   flexDirection: 'column',
   height: '100%',
   padding: '20px',
+  backgroundColor: '#F7F8F9',
 });
 
 const Header = styled('div')({
@@ -15,6 +16,8 @@ const Header = styled('div')({
   flexDirection: 'row',
   height: '200px',
 });
+
+const Tabs = styled('div');
 
 const Main = () => (
   <Layout>

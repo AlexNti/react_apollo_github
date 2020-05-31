@@ -6,7 +6,7 @@ import styled from '@emotion/styled';
 
 const FieldBlock = styled('div')(({ width }) => ({
   alignItems: 'center',
-  border: '1px solid black',
+  border: '1px solid',
   borderRadius: 4,
   width: `${width}px`,
   display: 'flex',
@@ -21,11 +21,11 @@ const Input = styled('input')(({ error }) => ({
   borderRadius: 4,
   boxShadow: 'none',
   color: 'black',
-  fontSize: '.9375rem',
-  lineHeight: '24px',
+  fontSize: '15px',
   outline: 0,
   padding: '7px 8px', // account for top/bottom border
   width: '100%',
+  height: '100%',
   '::placeholder': {
     color: error ? 'red' : undefined,
   },
