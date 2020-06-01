@@ -41,7 +41,6 @@ const AccessTokenAndRepoForm = () => {
 
   const onSubmit = (event) => {
     event.preventDefault();
-    console.log('called');
     getRepoInfo({ variables: { name: 'react', owner: 'facebook' } });
   };
 
@@ -49,10 +48,6 @@ const AccessTokenAndRepoForm = () => {
     const { name, value } = event.target;
     setValues({ ...values, [name]: value });
   }, [values]);
-
-  if (data) {
-    console.log(data);
-  }
 
   return (
     <Form onSubmit={onSubmit}>
@@ -70,7 +65,7 @@ const AccessTokenAndRepoForm = () => {
           placeholder="Access Token"
         />
       </FieldsWpapper>
-      <SubmitButton type="submit">
+      <SubmitButton disabled={loading}>
         Load
       </SubmitButton>
     </Form>
