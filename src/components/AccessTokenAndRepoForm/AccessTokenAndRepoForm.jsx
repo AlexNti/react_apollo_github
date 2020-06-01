@@ -49,6 +49,10 @@ const AccessTokenAndRepoForm = () => {
     setValues({ ...values, [name]: value });
   }, [values]);
 
+  if (data) {
+    console.log(data);
+  }
+
   return (
     <Form onSubmit={onSubmit}>
       <FieldsWpapper>

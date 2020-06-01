@@ -47,7 +47,7 @@ const ButtonRoot = ({
   onClick, children, height, width, disabled, ...props
 }) => (
   // eslint-disable-next-line react/jsx-props-no-spreading
-  <BaseButton height={height} width={width} disabled={disabled} {...props}>
+  <BaseButton onClick={onClick} height={height} width={width} disabled={disabled} {...props}>
     {children}
   </BaseButton>
 );

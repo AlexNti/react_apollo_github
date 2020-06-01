@@ -31,6 +31,10 @@ query getRepoInfo($cursor:String $name:String! $owner:String!) {
           }
           }
         }
+        pageInfo {
+          endCursor
+          hasNextPage
+        }
       }
       forks(first: 20, after: $cursor) {
         edges {
