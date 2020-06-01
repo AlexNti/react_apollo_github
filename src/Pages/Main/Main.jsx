@@ -44,6 +44,7 @@ const GitHubContent = styled('div')({
 const Main = () => {
   const { history } = useRouter();
   const [selectedTab, setSelectedTab] = React.useState('issues');
+  console.log('main');
 
   useEffect(() => { history.push(`/${selectedTab}`); }, [selectedTab]);
   return (
@@ -60,4 +61,4 @@ const Main = () => {
     </Layout>
   );
 };
-export default Main;
+export default React.memo(Main);

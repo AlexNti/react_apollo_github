@@ -1,6 +1,18 @@
 import React from 'react';
 
-import Table from './IssuesTable';
+// import { useQuery } from '@apollo/client';
 
-const issues = () => (<Table />);
-export default issues;
+import Table from './IssuesTable';
+// import GET_REPO_INFO from '../../operations/queries/getRepoInfo';
+
+const Issues = () => {
+  console.log('issues');
+  //   const { data, loading } = useQuery(GET_REPO_INFO);
+
+  //   if (data) {
+  //     console.log(data);
+  //   }
+
+  return <Table />;
+};
+export default React.memo(Issues);

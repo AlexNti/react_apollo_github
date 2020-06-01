@@ -35,7 +35,8 @@ export const TableBodyWrapper = styled('div')({
   display: 'flex',
   flexDirection: 'column',
   width: '100%',
-  boxShadow: '6px 4px 5px 0px rgba(0,0,0,0.20)',
+  boxShadow: '6px 4px 5px 0px rgba(0,0,0,0.10)',
+  marginBottom: '10px',
 }, ({
   bgColor,
 }) => (bgColor
@@ -49,4 +50,7 @@ export const TableBody = styled('div')({
   height: '50px',
   padding: '10px',
   boxSizing: 'border-box',
+  textAlign: 'center',
+  verticalAlign: 'middle',
+  lineHeight: '30px',
 });

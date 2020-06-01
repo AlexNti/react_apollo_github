@@ -8,7 +8,7 @@ const IssuesTable = () => (
   <Table>
     <TableColumn>
       <TableRow>
-        <TableHeader>Here is Table Header</TableHeader>
+        <TableHeader>Number</TableHeader>
       </TableRow>
 
       <TableBodyWrapper bgColor="white">
@@ -17,33 +17,43 @@ const IssuesTable = () => (
             Here is Table Body
           </TableBody>
         </TableRow>
-
-        <TableRow>
-          <TableBody>
-            Here is Table Body
-          </TableBody>
-        </TableRow>
       </TableBodyWrapper>
+
     </TableColumn>
 
     <TableColumn>
       <TableRow>
-        <TableHeader>Here is Table Header</TableHeader>
+        <TableHeader>Title</TableHeader>
       </TableRow>
 
-      <TableBodyWrapper bgColor="white">
-        <TableRow>
-          <TableBody>
-            Here is Table Body
-          </TableBody>
-        </TableRow>
+    </TableColumn>
 
-        <TableRow>
-          <TableBody>
-            Here is Table Body
-          </TableBody>
-        </TableRow>
-      </TableBodyWrapper>
+    <TableColumn>
+      <TableRow>
+        <TableHeader>Author</TableHeader>
+      </TableRow>
+
+    </TableColumn>
+
+    <TableColumn>
+      <TableRow>
+        <TableHeader>Comment count</TableHeader>
+      </TableRow>
+
+    </TableColumn>
+
+    <TableColumn>
+      <TableRow>
+        <TableHeader>Created At</TableHeader>
+      </TableRow>
+
+    </TableColumn>
+
+    <TableColumn>
+      <TableRow>
+        <TableHeader>State</TableHeader>
+      </TableRow>
+
     </TableColumn>
 
 

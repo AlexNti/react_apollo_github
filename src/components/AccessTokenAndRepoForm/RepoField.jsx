@@ -31,4 +31,4 @@ RepoField.propTypes = {
 
 };
 
-export default RepoField;
+export default React.memo(RepoField);

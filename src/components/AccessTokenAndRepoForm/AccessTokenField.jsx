@@ -31,4 +31,4 @@ AccessTokenField.propTypes = {
 
 };
 
-export default AccessTokenField;
+export default React.memo(AccessTokenField);
