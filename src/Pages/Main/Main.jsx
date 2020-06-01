@@ -30,6 +30,7 @@ const Tabs = styled('div')({
   backgroundColor: 'white',
   boxShadow: '2px 4px 5px 0px rgba(0,0,0,0.75)',
   boxSizing: 'border-box',
+  borderRadius: '2px',
 });
 
 const GitHubContent = styled('div')({

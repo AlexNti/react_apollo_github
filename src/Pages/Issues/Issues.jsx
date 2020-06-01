@@ -1,4 +1,6 @@
 import React from 'react';
 
-const issues = () => (<div>Here is issues</div>);
+import Table from './IssuesTable';
+
+const issues = () => (<Table />);
 export default issues;
