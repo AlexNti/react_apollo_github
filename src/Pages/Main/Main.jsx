@@ -43,8 +43,8 @@ const GitHubContent = styled('div')({
 // TODO CREATE JSON OBJECT WITH CURRENT TABS
 const Main = () => {
   const { history } = useRouter();
-  const [selectedTab, setSelectedTab] = React.useState('issues');
-  console.log('main');
+  const [selectedTab, setSelectedTab] = React.useState('');
+
 
   useEffect(() => { history.push(`/${selectedTab}`); }, [selectedTab]);
   return (
