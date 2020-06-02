@@ -11,7 +11,7 @@ const renderTableRow = (tableKey, data) => {
 
 
   const row = edges.map((edge) => (
-    <TableBodyWrapper bgColor="white">
+    <TableBodyWrapper key={edge.node.id} bgColor="white">
       <TableRow>
         <TableBody>
           {getNestedObjectValue(edge.node, tableKey.path)}
