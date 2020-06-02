@@ -84,28 +84,28 @@ A table with following properties:
 
 #### Pull Requests
 
-- Router: `/pull-requests`
-- Columns [title, author, commentCount, createdAt, state]
-- **[OPT]** Filter by state: [Open, Closed, Merged], defaults to Open
-- **[OPT]** Sort by: [commentCount, createdAt], default commentCount desc
+- Router: `/pull-requests`**[DONE]**
+- Columns [title, author, commentCount, createdAt, state]**[DONE]**
+- **[OPT]** Filter by state: [Open, Closed, Merged], defaults to Open **[PENDING]**
+- **[OPT]** Sort by: [commentCount, createdAt], default commentCount desc **[PENDING]**
 
 #### Forks
 
-- Router: `/forks`
-- Columns: [repoAndOwnerName, description, starCount, createdAt]
-- **[OPT]** Filter by Privacy: [Public, Private, All], defaults is Public
-- **[OPT]** Sort by: [starCount, createdAt], default starCount desc
+- Router: `/forks`**[DONE]**
+- Columns: [repoAndOwnerName, description, starCount, createdAt]**[DONE]**
+- **[OPT]** Filter by Privacy: [Public, Private, All], defaults is Public **[PENDING]**
+- **[OPT]** Sort by: [starCount, createdAt], default starCount desc **[PENDING]**
 
 #### All Tab Tables
 
 Tables should implement
 
 - Pagination
-  - Up to 20 results in the first request
-  - **[OPT]** Load more button to bring next 20
-- **[OPT]** Button to toggle sorting between asc/desc
-- **[OPT]** Filter dropdown. A results count, should be shown above the table.
-  - The top level (tab) counts should not be effected by these filters.
+  - Up to 20 results in the first request **[DONE]**
+  - **[OPT]** Load more button to bring next 20  **[PENDING]**
+- **[OPT]** Button to toggle sorting between asc/desc **[PENDING]**
+- **[OPT]** Filter dropdown. A results count, should be shown above the table. **[PENDING]**
+  - The top level (tab) counts should not be effected by these filters. **[PENDING]**
 
 ### Star/Un-star Toggle
 

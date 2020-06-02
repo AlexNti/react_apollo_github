@@ -64,13 +64,13 @@ const TabData = styled('div')({
 
 // TODO ADD TRANSITION TO UNDERLINE
 const TabItem = ({
-  id, selectedTabId, data, tabName, onClick,
+  id, selectedTabId, count, tabName, onClick,
 }) => (
   <BaseTabItem isSelected={selectedTabId === id}>
     <TabButton onClick={() => { onClick(id); }}>
       <TabContent>
         <TabData>
-          Data
+          {count}
         </TabData>
         <TabName>
           {tabName}
@@ -82,7 +82,7 @@ const TabItem = ({
 
 
 TabItem.defaultProps = {
-  data: {},
+  count: 0,
 };
 
 
@@ -92,7 +92,7 @@ TabItem.propTypes = {
   tabName: PropTypes.string.isRequired,
   onClick: PropTypes.func.isRequired,
   // eslint-disable-next-line react/forbid-prop-types
-  data: PropTypes.object,
+  count: PropTypes.number,
 
 };
 
