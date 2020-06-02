@@ -1,5 +1,5 @@
 import styled from '@emotion/styled';
-
+// TODO MAKE TABLE RESPONSIVE
 export const Table = styled('div')({
   display: 'flex',
   flexDirection: 'row',

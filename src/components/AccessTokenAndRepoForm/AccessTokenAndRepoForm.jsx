@@ -6,7 +6,10 @@ import RepoField from './RepoField';
 import AccessTokenField from './AccessTokenField';
 import Button from '../Button';
 import GET_REPO_INFO from '../../operations/queries/getRepoInfo';
-
+import Storage from '../../utils/storage';
+// TODO ADD VALIDATION ERROR
+const REPO = 'REPO';
+const ACCESS_TOKEN = 'ACCESS_TOKEN';
 
 const Form = styled('form')({
   display: 'flex',
@@ -35,20 +38,26 @@ const SubmitButton = styled(Button)(({
 }));
 
 const AccessTokenAndRepoForm = () => {
-  const [getRepoInfo, { loading, data }] = useLazyQuery(GET_REPO_INFO);
-  const [values, setValues] = React.useState({ repo: 'facebook/react', accessToken: 'b6d61ab06aa8c96347d760400c9ee390ad2c8a48' });
+  const [getRepoInfo, { loading, data, error }] = useLazyQuery(GET_REPO_INFO);
+  const [values, setValues] = React.useState({ repo: Storage.local.read(REPO) || '', accessToken: Storage.local.read(ACCESS_TOKEN) });
 
 
   const onSubmit = (event) => {
     event.preventDefault();
-    getRepoInfo({ variables: { name: 'react', owner: 'facebook' } });
+    if (!values.repo || !values.accessToken) return;
+    const [owner, name] = values.repo.split('/');
+    Storage.local.write(REPO, values.repo);
+    Storage.local.write(ACCESS_TOKEN, values.accessToken);
+    getRepoInfo({ variables: { owner, name } });
   };
 
   const handleInputChange = React.useCallback((event) => {
     const { name, value } = event.target;
     setValues({ ...values, [name]: value });
   }, [values]);
-
+  if (error) {
+    console.log(error);
+  }
   if (data) {
     console.log(data);
   }
