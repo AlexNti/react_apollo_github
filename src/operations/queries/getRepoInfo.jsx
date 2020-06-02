@@ -7,6 +7,7 @@ query getRepoInfo($cursor:String $name:String! $owner:String!) {
       pullRequests(first: 20, after: $cursor) {
         edges {
           node {
+            id
             author{
                 login
             }
@@ -59,6 +60,12 @@ query getRepoInfo($cursor:String $name:String! $owner:String!) {
         edges {
           node {
             id
+            description
+            createdAt
+            nameWithOwner
+            stargazers{
+            totalCount
+          }
           }
         }
         pageInfo {
