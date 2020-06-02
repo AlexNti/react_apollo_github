@@ -8,6 +8,7 @@ import Button from '../Button';
 import GET_REPO_INFO from '../../operations/queries/getRepoInfo';
 import Storage from '../../utils/storage';
 // TODO ADD VALIDATION ERROR
+// TODO ADD LABELS
 const REPO = 'REPO';
 const ACCESS_TOKEN = 'ACCESS_TOKEN';
 
@@ -76,6 +77,7 @@ const AccessTokenAndRepoForm = () => {
           value={values.accessToken}
           onChange={(event) => handleInputChange(event)}
           placeholder="Access Token"
+          type="password"
         />
       </FieldsWpapper>
       <SubmitButton disabled={loading}>

@@ -39,10 +39,18 @@ const InputField = ({
   placeholder,
   value,
   width,
+  ...props
 }) => (
   <FieldBlock width={width}>
 
-    <Input error={error} name={name} value={value} placeholder={placeholder} onChange={onChange} />
+    <Input
+      {...props}
+      error={error}
+      name={name}
+      value={value}
+      placeholder={placeholder}
+      onChange={onChange}
+    />
 
   </FieldBlock>
 );
