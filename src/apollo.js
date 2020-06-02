@@ -1,6 +1,9 @@
 import { ApolloClient, createHttpLink, InMemoryCache } from '@apollo/client';
 import { setContext } from '@apollo/link-context';
 
+import Storage from './utils/storage';
+import { ACCESS_TOKEN } from './constats';
+
 const httpLink = createHttpLink({
   uri: process.env.REACT_APP_GRAPHQL_ENDPOINT,
 });
@@ -14,7 +17,7 @@ const authLink = setContext((_, { headers }) => {
   return {
     headers: {
       ...headers,
-      authorization: token ? `Bearer ${'b6d61ab06aa8c96347d760400c9ee390ad2c8a48'}` : '',
+      authorization: token ? `Bearer ${Storage.local.read(ACCESS_TOKEN)}` : '',
     },
   };
 });

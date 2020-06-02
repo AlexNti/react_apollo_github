@@ -13,7 +13,7 @@ class Storage {
   read(key) {
     const data = this.storageInstance.getItem(key);
     if (data === null) {
-      return null;
+      return '';
     }
 
     try {
