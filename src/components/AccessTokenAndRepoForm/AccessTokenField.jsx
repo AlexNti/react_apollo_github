@@ -9,9 +9,17 @@ const AccessTokenField = ({
   onChange,
   placeholder,
   value,
+  type,
 }) => (
 
-  <Input error={error} name={name} value={value} placeholder={placeholder} onChange={onChange} />
+  <Input
+    type={type}
+    error={error}
+    name={name}
+    value={value}
+    placeholder={placeholder}
+    onChange={onChange}
+  />
 
 );
 
@@ -20,15 +28,17 @@ AccessTokenField.defaultProps = {
   error: '',
   placeholder: '',
   value: '',
+  type: 'text',
 };
 
 AccessTokenField.propTypes = {
   name: PropTypes.string.isRequired,
-  error: PropTypes.bool,
+  error: PropTypes.string,
   onChange: PropTypes.func.isRequired,
   placeholder: PropTypes.string,
   value: PropTypes.string,
+  type: PropTypes.string,
 
 };
 
-export default AccessTokenField;
+export default React.memo(AccessTokenField);

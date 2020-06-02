@@ -39,10 +39,18 @@ const InputField = ({
   placeholder,
   value,
   width,
+  ...props
 }) => (
   <FieldBlock width={width}>
 
-    <Input error={error} name={name} value={value} placeholder={placeholder} onChange={onChange} />
+    <Input
+      {...props}
+      error={error}
+      name={name}
+      value={value}
+      placeholder={placeholder}
+      onChange={onChange}
+    />
 
   </FieldBlock>
 );
@@ -57,7 +65,7 @@ InputField.defaultProps = {
 
 InputField.propTypes = {
   name: PropTypes.string.isRequired,
-  error: PropTypes.bool,
+  error: PropTypes.string,
   onChange: PropTypes.func.isRequired,
   placeholder: PropTypes.string,
   value: PropTypes.string,

@@ -1,9 +1,16 @@
 import React from 'react';
 import styled from '@emotion/styled';
+import { useLazyQuery } from '@apollo/client';
 
 import RepoField from './RepoField';
 import AccessTokenField from './AccessTokenField';
 import Button from '../Button';
+import GET_REPO_INFO from '../../operations/queries/getRepoInfo';
+import Storage from '../../utils/storage';
+import { REPO, ACCESS_TOKEN } from '../../constats';
+// TODO ADD VALIDATION ERROR
+// TODO ADD LABELS
+
 
 const Form = styled('form')({
   display: 'flex',
@@ -32,18 +39,29 @@ const SubmitButton = styled(Button)(({
 }));
 
 const AccessTokenAndRepoForm = () => {
-  const [values, setValues] = React.useState({ repo: '', accessToken: '' });
+  const [getRepoInfo, { loading, data, error }] = useLazyQuery(GET_REPO_INFO);
+  const [values, setValues] = React.useState({ repo: Storage.local.read(REPO) || '', accessToken: Storage.local.read(ACCESS_TOKEN) });
 
 
   const onSubmit = (event) => {
     event.preventDefault();
-    console.log('clicked');
+    if (!values.repo || !values.accessToken) return;
+    const [owner, name] = values.repo.split('/');
+    Storage.local.write(REPO, values.repo);
+    Storage.local.write(ACCESS_TOKEN, values.accessToken);
+    getRepoInfo({ variables: { owner, name } });
   };
 
   const handleInputChange = React.useCallback((event) => {
     const { name, value } = event.target;
     setValues({ ...values, [name]: value });
-  }, [values.repo, values.accessToken]);
+  }, [values]);
+  if (error) {
+    console.log(error);
+  }
+  if (data) {
+    console.log(data);
+  }
 
   return (
     <Form onSubmit={onSubmit}>
@@ -59,9 +77,10 @@ const AccessTokenAndRepoForm = () => {
           value={values.accessToken}
           onChange={(event) => handleInputChange(event)}
           placeholder="Access Token"
+          type="password"
         />
       </FieldsWpapper>
-      <SubmitButton type="submit">
+      <SubmitButton disabled={loading}>
         Load
       </SubmitButton>
     </Form>
