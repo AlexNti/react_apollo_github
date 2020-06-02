@@ -46,7 +46,7 @@ const Main = () => {
   const [selectedTab, setSelectedTab] = React.useState('');
 
 
-  useEffect(() => { history.push(`/${selectedTab}`); }, [selectedTab, history]);
+  useEffect(() => { if (selectedTab) history.push(`/${selectedTab}`); }, [selectedTab, history]);
 
   return (
     <Layout>

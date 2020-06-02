@@ -36,7 +36,7 @@ const Issues = () => {
     data, loading, error, fetchMore,
   } = useQuery(GET_ISSUES, { variables: { name: 'react', owner: 'facebook' } });
   // const headerKeys = ['author', 'comments', 'createdAt', 'id', 'title'];
-  const headerKeys = ['title', 'createdAt', 'id'];
+  const headerKeys = ['id', 'title', 'createdAt'];
 
 
   // const loadMore = () => {

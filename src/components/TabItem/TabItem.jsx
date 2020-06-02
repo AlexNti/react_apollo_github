@@ -67,7 +67,7 @@ const TabItem = ({
   id, selectedTabId, data, tabName, onClick,
 }) => (
   <BaseTabItem isSelected={selectedTabId === id}>
-    <TabButton onClick={() => { console.log(id); onClick(id); }}>
+    <TabButton onClick={() => { onClick(id); }}>
       <TabContent>
         <TabData>
           Data
