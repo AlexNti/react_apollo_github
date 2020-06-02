@@ -2,8 +2,9 @@ import React from 'react';
 import {
   Table, TableRow, TableColumn, TableHeader, TableBody, TableBodyWrapper,
 } from '../../components/Table/index';
+import getNestedObjectValue from '../../utils/getNestedObjectValue';
 
-const renderTableRow = (headerKey, data) => {
+const renderTableRow = (tableKey, data) => {
   if (!data || !data.repository) return <></>;
   const { issues } = data.repository;
   const { edges } = issues;
@@ -13,7 +14,7 @@ const renderTableRow = (headerKey, data) => {
     <TableBodyWrapper bgColor="white">
       <TableRow>
         <TableBody>
-          {edge.node[headerKey]}
+          {getNestedObjectValue(edge.node, tableKey.path)}
         </TableBody>
       </TableRow>
     </TableBodyWrapper>
@@ -23,14 +24,14 @@ const renderTableRow = (headerKey, data) => {
 };
 
 
-const IssuesTable = ({ headerKeys = [], data }) => (
+const IssuesTable = ({ tableKeys = [], data }) => (
   <Table>
-    {headerKeys.map((headerKey, index) => (
-      <TableColumn key={headerKey}>
+    {tableKeys.map((tableKey, index) => (
+      <TableColumn key={tableKey.header}>
         <TableRow>
-          <TableHeader>{headerKey}</TableHeader>
+          <TableHeader>{tableKey.header}</TableHeader>
         </TableRow>
-        {renderTableRow(headerKey, data)}
+        {renderTableRow(tableKey, data)}
       </TableColumn>
     ))}
 

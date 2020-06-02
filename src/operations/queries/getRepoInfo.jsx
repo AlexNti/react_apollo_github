@@ -18,6 +18,8 @@ query getRepoInfo($cursor:String $name:String! $owner:String!) {
             id
           title
           createdAt
+          state
+          number
           author{
             login
           }

@@ -13,6 +13,8 @@ query getIssues($cursor: String, $name: String!, $owner: String!) {
         node {
           id
           title
+          state
+          number
           createdAt
           author {
             login
@@ -35,8 +37,14 @@ const Issues = () => {
   const {
     data, loading, error, fetchMore,
   } = useQuery(GET_ISSUES, { variables: { name: 'react', owner: 'facebook' } });
-  // const headerKeys = ['author', 'comments', 'createdAt', 'id', 'title'];
-  const headerKeys = ['id', 'title', 'createdAt'];
+  const tableKeys = [
+    { header: 'id', path: 'id' },
+    { header: 'title', path: 'title' },
+    { header: 'comments', path: 'comments.totalCount' },
+    { header: 'state', path: 'state' },
+    { header: 'number', path: 'number' },
+    { header: 'createdAt', path: 'createdAt' },
+    { header: 'author', path: 'author.login' }];
 
 
   // const loadMore = () => {
@@ -52,6 +60,6 @@ const Issues = () => {
   // };
 
 
-  return <Table headerKeys={headerKeys} data={data} />;
+  return <Table tableKeys={tableKeys} data={data} />;
 };
 export default React.memo(Issues);
