@@ -77,10 +77,10 @@ A table with following properties:
 
 #### Issues
 
-- Router: `/issues`
-- Columns [number, title, author, commentCount, createdAt, state]
-- Filter by state: [Open, Closed, All], defaults to Open
-- Sort by: [commentCount, createdAt], default commendCount desc
+- Router: `/issues` **[DONE]**
+- Columns [number, title, author, commentCount, createdAt, state] **[DONE]**
+- Filter by state: [Open, Closed, All], defaults to Open **[PENDING]**
+- Sort by: [commentCount, createdAt], default commendCount desc **[HALF]**
 
 #### Pull Requests
 
