@@ -12,6 +12,7 @@ query getPullRequests($cursor: String, $name: String!, $owner: String!) {
     pullRequests(first: 20, after: $cursor) {
         edges {
           node {
+            id
             author{
                 login
             }
@@ -37,7 +38,7 @@ query getPullRequests($cursor: String, $name: String!, $owner: String!) {
 }
 `;
 
-const Issues = () => {
+const PullRequests = () => {
   const [owner, name] = Storage.local.read(REPO).split('/');
   const {
     data, loading, error, fetchMore,
@@ -52,4 +53,4 @@ const Issues = () => {
 
   return <Table tableKeys={tableKeys} data={data} />;
 };
-export default React.memo(Issues);
+export default React.memo(PullRequests);

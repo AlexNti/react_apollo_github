@@ -3,7 +3,8 @@ import React from 'react';
 import { useQuery, gql } from '@apollo/client';
 
 import Table from './IssuesTable';
-
+import Storage from '../../utils/storage';
+import { REPO } from '../../constats';
 
 const GET_ISSUES = gql`
 query getIssues($cursor: String, $name: String!, $owner: String!) {
@@ -35,9 +36,10 @@ query getIssues($cursor: String, $name: String!, $owner: String!) {
 `;
 
 const Issues = () => {
+  const [owner, name] = Storage.local.read(REPO).split('/');
   const {
     data, loading, error, fetchMore,
-  } = useQuery(GET_ISSUES, { variables: { name: 'react', owner: 'facebook' } });
+  } = useQuery(GET_ISSUES, { variables: { name, owner } });
   const tableKeys = [
     { header: 'id', path: 'id' },
     { header: 'title', path: 'title' },

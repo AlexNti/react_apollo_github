@@ -7,7 +7,9 @@ import useRouter from '../../hooks/useRouter';
 import AccessTokenAndRepoForm from '../../components/AccessTokenAndRepoForm';
 import TabItem from '../../components/TabItem';
 import IssuesPage from '../Issues';
-import PullRequestTable from '../PullRequests/index';
+import PullRequestPage from '../PullRequests';
+import ForksPage from '../Forks';
+
 
 const Layout = styled('div')({
   display: 'flex',
@@ -64,7 +66,9 @@ const Main = () => {
       </Tabs>
       <GitHubContent>
         <Switch><Route path="/issues" component={IssuesPage} /></Switch>
-        <Switch><Route path="/pullrequests" component={PullRequestTable} /></Switch>
+        <Switch><Route path="/pullrequests" component={PullRequestPage} /></Switch>
+        <Switch><Route path="/forks" component={ForksPage} /></Switch>
+
 
       </GitHubContent>
     </Layout>
