@@ -7,8 +7,25 @@ query getRepoInfo($cursor:String $name:String! $owner:String!) {
       pullRequests(first: 20, after: $cursor) {
         edges {
           node {
-            id
+            author{
+                login
+            }
+            createdAt
+            state
+            title
+            comments(last:10) {
+            totalCount
+            edges {
+              node {
+                id
+              }
+            }
           }
+          }
+        }
+        pageInfo {
+          endCursor
+          hasNextPage
         }
       }
       issues(first: 20, after: $cursor) {
@@ -43,6 +60,10 @@ query getRepoInfo($cursor:String $name:String! $owner:String!) {
           node {
             id
           }
+        }
+        pageInfo {
+          endCursor
+          hasNextPage
         }
       }
     }
