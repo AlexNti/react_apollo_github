@@ -4,19 +4,21 @@ import PropTypes from 'prop-types';
 import styled from '@emotion/styled';
 
 
-const FieldBlock = styled('div')(({ width }) => ({
+const FieldBlock = styled('div')(({ width, error }) => ({
   alignItems: 'center',
-  border: '1px solid',
+  border: error ? '1px solid red' : '1px solid',
   borderRadius: 4,
   width: `${width}px`,
   display: 'flex',
   height: '50px',
   marginRight: '10px',
+  position: 'relative',
 }));
 
 const Input = styled('input')(({ error }) => ({
   appearance: 'none',
   backgroundColor: '#FFFFFF',
+  position: 'relative',
   border: 0,
   borderRadius: 4,
   boxShadow: 'none',
@@ -30,7 +32,6 @@ const Input = styled('input')(({ error }) => ({
     color: error ? 'red' : undefined,
   },
 }));
-
 
 const InputField = ({
   error,
@@ -51,6 +52,7 @@ const InputField = ({
       placeholder={placeholder}
       onChange={onChange}
     />
+
 
   </FieldBlock>
 );

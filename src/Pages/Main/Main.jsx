@@ -83,9 +83,10 @@ const Main = () => {
 
   if (loading) return 'Loading...';
 
-  const totalCountIssues = data.repository.issues.totalCount || 0;
-  const totalCountForks = data.repository.forks.totalCount || 0;
-  const totalCountPullRequests = data.repository.pullRequests.totalCount || 0;
+
+  const totalCountIssues = error ? 0 : data.repository.issues.totalCount || 0;
+  const totalCountForks = error ? 0 : data.repository.forks.totalCount || 0;
+  const totalCountPullRequests = error ? 0 : data.repository.pullRequests.totalCount || 0;
 
 
   return (

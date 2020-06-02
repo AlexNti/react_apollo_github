@@ -57,6 +57,15 @@ const AccessTokenAndRepoForm = () => {
     setValues({ ...values, [name]: value });
   }, [values]);
 
+  const validateFields = React.useCallback(() => {
+    const { repo, accessToken } = values;
+    const validate = {
+      repo: repo !== '' ? '' : 'Repo is required',
+      accessToken: accessToken !== '' ? '' : 'Repo is required',
+    };
+    return validate;
+  }, [values]);
+
 
   return (
     <Form onSubmit={onSubmit}>
@@ -66,6 +75,7 @@ const AccessTokenAndRepoForm = () => {
           value={values.repo}
           onChange={(event) => handleInputChange(event)}
           placeholder="Repo Name"
+          error={validateFields().repo}
         />
         <AccessTokenField
           name="accessToken"
@@ -73,6 +83,8 @@ const AccessTokenAndRepoForm = () => {
           onChange={(event) => handleInputChange(event)}
           placeholder="Access Token"
           type="password"
+          error={validateFields().accessToken}
+
         />
       </FieldsWpapper>
       <SubmitButton disabled={loading}>
