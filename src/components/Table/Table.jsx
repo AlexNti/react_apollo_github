@@ -29,6 +29,8 @@ export const TableHeader = styled('div')({
   fontSize: '15px',
   color: 'gray',
   height: '40px',
+  padding: '10px',
+
 });
 
 export const TableBodyWrapper = styled('div')({

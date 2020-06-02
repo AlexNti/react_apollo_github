@@ -4,57 +4,24 @@ import {
 } from '../../components/Table/index';
 
 
-const IssuesTable = () => (
+const IssuesTable = ({ headerKeys = [], data }) => (
   <Table>
-    <TableColumn>
-      <TableRow>
-        <TableHeader>Number</TableHeader>
-      </TableRow>
-
-      <TableBodyWrapper bgColor="white">
+    {headerKeys.map((headerKey, index) => (
+      <TableColumn>
         <TableRow>
-          <TableBody>
-            Here is Table Body
-          </TableBody>
+          <TableHeader>{headerKey}</TableHeader>
         </TableRow>
-      </TableBodyWrapper>
 
-    </TableColumn>
+        <TableBodyWrapper bgColor="white">
+          <TableRow>
+            <TableBody>
+              Here is Table Body
+            </TableBody>
+          </TableRow>
+        </TableBodyWrapper>
 
-    <TableColumn>
-      <TableRow>
-        <TableHeader>Title</TableHeader>
-      </TableRow>
-
-    </TableColumn>
-
-    <TableColumn>
-      <TableRow>
-        <TableHeader>Author</TableHeader>
-      </TableRow>
-
-    </TableColumn>
-
-    <TableColumn>
-      <TableRow>
-        <TableHeader>Comment count</TableHeader>
-      </TableRow>
-
-    </TableColumn>
-
-    <TableColumn>
-      <TableRow>
-        <TableHeader>Created At</TableHeader>
-      </TableRow>
-
-    </TableColumn>
-
-    <TableColumn>
-      <TableRow>
-        <TableHeader>State</TableHeader>
-      </TableRow>
-
-    </TableColumn>
+      </TableColumn>
+    ))}
 
 
   </Table>
