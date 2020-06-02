@@ -35,7 +35,9 @@ const Issues = () => {
   const {
     data, loading, error, fetchMore,
   } = useQuery(GET_ISSUES, { variables: { name: 'react', owner: 'facebook' } });
-  const headerKeys = ['author', 'comments', 'createdAt', 'id', 'title'];
+  // const headerKeys = ['author', 'comments', 'createdAt', 'id', 'title'];
+  const headerKeys = ['title', 'createdAt', 'id'];
+
 
   // const loadMore = () => {
   //   const { issues } = data.repository;
@@ -50,6 +52,6 @@ const Issues = () => {
   // };
 
 
-  return <Table headerKeys={headerKeys} />;
+  return <Table headerKeys={headerKeys} data={data} />;
 };
 export default React.memo(Issues);

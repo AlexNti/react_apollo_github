@@ -46,7 +46,8 @@ const Main = () => {
   const [selectedTab, setSelectedTab] = React.useState('');
 
 
-  useEffect(() => { history.push(`/${selectedTab}`); }, [selectedTab]);
+  useEffect(() => { history.push(`/${selectedTab}`); }, [selectedTab, history]);
+
   return (
     <Layout>
       <Header><AccessTokenAndRepoForm /></Header>

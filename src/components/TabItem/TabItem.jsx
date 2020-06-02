@@ -88,7 +88,7 @@ TabItem.defaultProps = {
 
 TabItem.propTypes = {
   id: PropTypes.string.isRequired,
-  selectedTabId: PropTypes.number.isRequired,
+  selectedTabId: PropTypes.string.isRequired,
   tabName: PropTypes.string.isRequired,
   onClick: PropTypes.func.isRequired,
   // eslint-disable-next-line react/forbid-prop-types
