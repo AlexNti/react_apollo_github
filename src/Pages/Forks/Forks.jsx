@@ -35,9 +35,7 @@ const Forks = () => {
   const {
     data, loading, error, fetchMore,
   } = useQuery(GET_FORKS, { variables: { name, owner } });
-  if (error) {
-    console.log(error);
-  }
+
   const tableKeys = [
     { header: 'description', path: 'description' },
     { header: 'createdAt', path: 'createdAt' },

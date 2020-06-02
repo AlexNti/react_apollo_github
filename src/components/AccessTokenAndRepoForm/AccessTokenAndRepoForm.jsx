@@ -56,12 +56,7 @@ const AccessTokenAndRepoForm = () => {
     const { name, value } = event.target;
     setValues({ ...values, [name]: value });
   }, [values]);
-  if (error) {
-    console.log(error);
-  }
-  if (data) {
-    console.log(data);
-  }
+
 
   return (
     <Form onSubmit={onSubmit}>

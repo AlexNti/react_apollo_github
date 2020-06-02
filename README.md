@@ -105,7 +105,7 @@ Tables should implement
   - **[OPT]** Load more button to bring next 20  **[PENDING]**
 - **[OPT]** Button to toggle sorting between asc/desc **[PENDING]**
 - **[OPT]** Filter dropdown. A results count, should be shown above the table. **[PENDING]**
-  - The top level (tab) counts should not be effected by these filters. **[PENDING]**
+  - The top level (tab) counts should not be effected by these filters. **[DONE]**
 
 ### Star/Un-star Toggle
 
