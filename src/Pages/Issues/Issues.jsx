@@ -4,6 +4,7 @@ import { useQuery, gql } from '@apollo/client';
 
 import Table from './IssuesTable';
 
+
 const GET_ISSUES = gql`
 query getIssues($cursor: String, $name: String!, $owner: String!) {
   repository(name: $name, owner: $owner) {

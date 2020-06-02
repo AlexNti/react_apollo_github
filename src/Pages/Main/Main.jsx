@@ -3,9 +3,11 @@ import styled from '@emotion/styled';
 import { Switch, Route } from 'react-router-dom';
 
 import useRouter from '../../hooks/useRouter';
+
 import AccessTokenAndRepoForm from '../../components/AccessTokenAndRepoForm';
 import TabItem from '../../components/TabItem';
 import IssuesPage from '../Issues';
+import PullRequestTable from '../PullRequests/index';
 
 const Layout = styled('div')({
   display: 'flex',
@@ -42,11 +44,15 @@ const GitHubContent = styled('div')({
 
 // TODO CREATE JSON OBJECT WITH CURRENT TABS
 const Main = () => {
-  const { history } = useRouter();
+  const { history, location } = useRouter();
   const [selectedTab, setSelectedTab] = React.useState('');
 
 
-  useEffect(() => { if (selectedTab) history.push(`/${selectedTab}`); }, [selectedTab, history]);
+  useEffect(() => {
+    if (selectedTab) history.push(`/${selectedTab}`);
+  }, [selectedTab, history]);
+  useEffect(() => { setSelectedTab(location.pathname.substring(1)); }, [location]);
+
 
   return (
     <Layout>
@@ -58,6 +64,8 @@ const Main = () => {
       </Tabs>
       <GitHubContent>
         <Switch><Route path="/issues" component={IssuesPage} /></Switch>
+        <Switch><Route path="/pullrequests" component={PullRequestTable} /></Switch>
+
       </GitHubContent>
     </Layout>
   );
