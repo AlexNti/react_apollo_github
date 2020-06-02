@@ -1,4 +1,6 @@
 import React from 'react';
+import PropTypes from 'prop-types';
+
 import {
   Table, TableRow, TableColumn, TableHeader, TableBody, TableBodyWrapper,
 } from '../../components/Table/index';
@@ -27,7 +29,7 @@ const renderTableRow = (tableKey, data) => {
 };
 
 
-const IssuesTable = ({ tableKeys = [], data }) => (
+const IssuesTable = ({ tableKeys, data }) => (
   <Table>
     {tableKeys.map((tableKey) => (
       <TableColumn key={tableKey.header}>
@@ -39,5 +41,23 @@ const IssuesTable = ({ tableKeys = [], data }) => (
     ))}
   </Table>
 );
+
+IssuesTable.defaultProps = {
+  tableKeys: [],
+  data: [],
+};
+
+IssuesTable.propTypes = {
+  /**
+   * Provide the tablekeys that for the header and column to be displayed
+   *  */
+  tableKeys: PropTypes.arrayOf(PropTypes.object),
+  /**
+   * Provide the data to be displayed in the table
+   *  */
+  data: PropTypes.arrayOf(PropTypes.object),
+
+
+};
 
 export default React.memo(IssuesTable);
