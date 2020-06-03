@@ -10,6 +10,7 @@ import Storage from '../../utils/storage';
 import GET_REPO_INFO from '../../operations/queries/getRepoInfo';
 import { REPO, ACCESS_TOKEN } from '../../constats';
 import { STAR_REPOSITORY, UNSTAR_REPOSITORY } from '../../operations/mutations';
+import Loading from '../FullScreenLoading';
 
 // TODO ADD VALIDATION ERROR
 // TODO ADD LABELS
@@ -92,7 +93,7 @@ const AccessTokenAndRepoForm = () => {
   }, [values]);
 
 
-  if (loading) return 'loading';
+  if (loading && !error) return <Loading />;
 
 
   return (
