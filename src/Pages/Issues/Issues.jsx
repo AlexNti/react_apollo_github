@@ -62,7 +62,6 @@ const Issues = (props) => {
       updateQuery: (previousResult, { fetchMoreResult }) => {
         const newEdges = fetchMoreResult.repository.issues.edges;
         const { pageInfo } = fetchMoreResult.repository.issues;
-        console.log({ previousResult, fetchMoreResult });
         return newEdges.length
           ? {
             // Put the new comments at the end of the list and update `pageInfo`

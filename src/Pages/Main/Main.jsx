@@ -92,9 +92,7 @@ const Main = () => {
 
   if (loading) return 'Loading...';
 
-  if(error){
-    console.log(error);
-  }
+
 
 
   const totalCountIssues = error ? 0 : data && data.repository.issues.totalCount || 0;
