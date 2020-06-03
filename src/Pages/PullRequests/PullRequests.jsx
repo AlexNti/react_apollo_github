@@ -8,7 +8,7 @@ import { REPO } from '../../constats';
 
 const GET_PULL_REQUESTS = gql`
 query getRepoInfo($cursor: String, $name: String!, $owner: String!) {
-  repository(name: $name, owner: $owner) {
+  repository(name: $name, owner: $owner) @client {
     pullRequests(first: 20, after: $cursor) {
         edges {
           node {
