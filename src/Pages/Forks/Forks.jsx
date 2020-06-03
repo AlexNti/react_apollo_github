@@ -7,7 +7,7 @@ import Storage from '../../utils/storage';
 import { REPO } from '../../constats';
 
 const GET_FORKS = gql`
-query getForks($cursor: String, $name: String!, $owner: String!) {
+query getRepoInfo($cursor: String, $name: String!, $owner: String!) {
   repository(name: $name, owner: $owner) {
     forks(first: 20, after: $cursor) {
         edges {
