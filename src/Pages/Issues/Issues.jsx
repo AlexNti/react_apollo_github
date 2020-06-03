@@ -7,7 +7,7 @@ import Storage from '../../utils/storage';
 import { REPO } from '../../constats';
 
 const GET_ISSUES = gql`
-query getIssues($cursor: String, $name: String!, $owner: String!) {
+query getRepoInfo($cursor: String, $name: String!, $owner: String!) {
   repository(name: $name, owner: $owner) {
     issues(first: 20, after: $cursor) {
       totalCount
