@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React,{ Suspense } from 'react';
 import styled from '@emotion/styled';
 import { Switch, Route } from 'react-router-dom';
 import { useQuery, gql } from '@apollo/client';
@@ -9,10 +9,17 @@ import { REPO } from '../../constats';
 
 import AccessTokenAndRepoForm from '../../components/AccessTokenAndRepoForm';
 import TabItem from '../../components/TabItem';
-import IssuesPage from '../Issues';
-import PullRequestPage from '../PullRequests';
-import ForksPage from '../Forks';
 
+
+const IssuesPage = React.lazy(() =>
+  import('../Issues')
+)
+const PullRequestPage = React.lazy(() =>
+  import('../PullRequests')
+)
+const ForksPage = React.lazy(() =>
+  import('../Forks')
+)
 
 const Layout = styled('div')({
   display: 'flex',
@@ -25,7 +32,8 @@ const Layout = styled('div')({
 const Header = styled('div')({
   display: 'flex',
   flexDirection: 'row',
-  height: '130px',
+  height: '120px',
+  marginBottom: '20px',
 });
 
 const Tabs = styled('div')({
@@ -47,20 +55,21 @@ const GitHubContent = styled('div')({
   marginTop: '20px',
 });
 
-const GET_TOTAL_COUNT = gql`
-query getTotalCount($cursor: String, $name: String!, $owner: String!) {
-  repository(name: $name, owner: $owner) {
-    issues(first: 20, after: $cursor) {
+const GET_TOTAL_COUNT =  gql`
+query getRepoInfo( $name: String!, $owner: String!) {
+  repository(name: $name, owner: $owner) @client {
+
+    issues(first: 20) {
       totalCount
     }
-    forks(first: 20, after: $cursor) {
-    totalCount
-    }
-    pullRequests(first: 20, after: $cursor){
+    forks(first: 20){
       totalCount
     }
+    pullRequests(first:20){
+      totalCount
+    }
+
   }
- 
 }
 `;
 
@@ -69,39 +78,49 @@ const Main = () => {
   const { history, location } = useRouter();
   const [selectedTab, setSelectedTab] = React.useState('');
   const [owner, name] = Storage.local.read(REPO).split('/');
-
   const {
     data, loading, error,
   } = useQuery(GET_TOTAL_COUNT, { variables: { name, owner } });
 
 
-  useEffect(() => {
+  React.useEffect(() => {
     if (selectedTab) history.push(`/${selectedTab}`);
+    if(!data) history.push("/")
   }, [selectedTab, history]);
-  useEffect(() => { setSelectedTab(location.pathname.substring(1)); }, [location]);
+  React.useEffect(() => { setSelectedTab(location.pathname.substring(1)); }, [location]);
 
 
   if (loading) return 'Loading...';
 
+  if(error){
+    console.log(error);
+  }
 
-  const totalCountIssues = error ? 0 : data.repository.issues.totalCount || 0;
-  const totalCountForks = error ? 0 : data.repository.forks.totalCount || 0;
-  const totalCountPullRequests = error ? 0 : data.repository.pullRequests.totalCount || 0;
+
+  const totalCountIssues = error ? 0 : data && data.repository.issues.totalCount || 0;
+  const totalCountForks = error ? 0 : data && data.repository.forks.totalCount || 0;
+  const totalCountPullRequests = error ? 0 : data && data.repository.pullRequests.totalCount || 0;
 
 
   return (
     <Layout>
       <Header><AccessTokenAndRepoForm /></Header>
-      <Tabs>
-        <TabItem selectedTabId={selectedTab} count={totalCountIssues} tabName="Issues" id="issues" onClick={setSelectedTab} />
-        <TabItem selectedTabId={selectedTab} count={totalCountPullRequests} tabName="Pull Request" id="pullrequests" onClick={setSelectedTab} />
-        <TabItem selectedTabId={selectedTab} count={totalCountForks} tabName="Forks" id="forks" onClick={setSelectedTab} />
-      </Tabs>
+      {data && 
+        <Tabs>
+          <TabItem selectedTabId={selectedTab} count={totalCountIssues} tabName="Issues" id="issues" onClick={setSelectedTab} />
+          <TabItem selectedTabId={selectedTab} count={totalCountPullRequests} tabName="Pull Request" id="pullrequests" onClick={setSelectedTab} />
+          <TabItem selectedTabId={selectedTab} count={totalCountForks} tabName="Forks" id="forks" onClick={setSelectedTab} />
+        </Tabs>}
+
+
       <GitHubContent>
-        <Switch><Route path="/issues" component={IssuesPage} /></Switch>
-        <Switch><Route path="/pullrequests" component={PullRequestPage} /></Switch>
-        <Switch><Route path="/forks" component={ForksPage} /></Switch>
+        <Suspense  fallback={<div>Loading...</div>}>
+          <Switch><Route path="/issues" component={IssuesPage} /></Switch>
+          <Switch><Route path="/pullrequests" component={PullRequestPage} /></Switch>
+          <Switch><Route path="/forks" component={ForksPage} /></Switch>
+        </Suspense>
       </GitHubContent>
+
     </Layout>
   );
 };

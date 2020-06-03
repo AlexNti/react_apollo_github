@@ -7,8 +7,8 @@ import Storage from '../../utils/storage';
 import { REPO } from '../../constats';
 
 const GET_PULL_REQUESTS = gql`
-query getPullRequests($cursor: String, $name: String!, $owner: String!) {
-  repository(name: $name, owner: $owner) {
+query getRepoInfo($cursor: String, $name: String!, $owner: String!) {
+  repository(name: $name, owner: $owner) @client {
     pullRequests(first: 20, after: $cursor) {
         edges {
           node {
@@ -41,7 +41,7 @@ query getPullRequests($cursor: String, $name: String!, $owner: String!) {
 const PullRequests = () => {
   const [owner, name] = Storage.local.read(REPO).split('/');
   const {
-    data, loading, error, fetchMore,
+    data, loading, error,
   } = useQuery(GET_PULL_REQUESTS, { variables: { name, owner } });
   const tableKeys = [
     { header: 'title', path: 'title' },

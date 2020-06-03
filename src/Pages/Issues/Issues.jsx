@@ -7,8 +7,8 @@ import Storage from '../../utils/storage';
 import { REPO } from '../../constats';
 
 const GET_ISSUES = gql`
-query getIssues($cursor: String, $name: String!, $owner: String!) {
-  repository(name: $name, owner: $owner) {
+query getRepoInfo($cursor: String, $name: String!, $owner: String!) {
+  repository(name: $name, owner: $owner) @client {
     issues(first: 20, after: $cursor) {
       totalCount
       edges {
@@ -38,7 +38,7 @@ query getIssues($cursor: String, $name: String!, $owner: String!) {
 const Issues = () => {
   const [owner, name] = Storage.local.read(REPO).split('/');
   const {
-    data, loading, error, fetchMore,
+    data, loading, error,
   } = useQuery(GET_ISSUES, { variables: { name, owner } });
   const tableKeys = [
     { header: 'id', path: 'id' },
