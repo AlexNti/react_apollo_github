@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React,{ Suspense } from 'react';
 import styled from '@emotion/styled';
 import { Switch, Route } from 'react-router-dom';
 import { useQuery, gql } from '@apollo/client';
@@ -9,10 +9,17 @@ import { REPO } from '../../constats';
 
 import AccessTokenAndRepoForm from '../../components/AccessTokenAndRepoForm';
 import TabItem from '../../components/TabItem';
-import IssuesPage from '../Issues';
-import PullRequestPage from '../PullRequests';
-import ForksPage from '../Forks';
 
+
+const IssuesPage = React.lazy(() =>
+  import('../Issues')
+)
+const PullRequestPage = React.lazy(() =>
+  import('../PullRequests')
+)
+const ForksPage = React.lazy(() =>
+  import('../Forks')
+)
 
 const Layout = styled('div')({
   display: 'flex',
@@ -25,7 +32,8 @@ const Layout = styled('div')({
 const Header = styled('div')({
   display: 'flex',
   flexDirection: 'row',
-  height: '130px',
+  height: '120px',
+  marginBottom: '20px',
 });
 
 const Tabs = styled('div')({
@@ -75,10 +83,10 @@ const Main = () => {
   } = useQuery(GET_TOTAL_COUNT, { variables: { name, owner } });
 
 
-  useEffect(() => {
+  React.useEffect(() => {
     if (selectedTab) history.push(`/${selectedTab}`);
   }, [selectedTab, history]);
-  useEffect(() => { setSelectedTab(location.pathname.substring(1)); }, [location]);
+  React.useEffect(() => { setSelectedTab(location.pathname.substring(1)); }, [location]);
 
 
   if (loading) return 'Loading...';
@@ -98,9 +106,13 @@ const Main = () => {
         <TabItem selectedTabId={selectedTab} count={totalCountForks} tabName="Forks" id="forks" onClick={setSelectedTab} />
       </Tabs>
       <GitHubContent>
+
+      <Suspense fallback={<div>Loading...</div>}>
         <Switch><Route path="/issues" component={IssuesPage} /></Switch>
         <Switch><Route path="/pullrequests" component={PullRequestPage} /></Switch>
         <Switch><Route path="/forks" component={ForksPage} /></Switch>
+      </Suspense>
+     
       </GitHubContent>
     </Layout>
   );

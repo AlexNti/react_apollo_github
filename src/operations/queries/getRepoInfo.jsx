@@ -4,6 +4,7 @@ import { gql } from '@apollo/client';
 const GET_REPO_INFO = gql`
 query getRepoInfo($cursor:String $name:String! $owner:String!) { 
     repository(name:$name owner:$owner){
+      viewerHasStarred
       pullRequests(first: 20, after: $cursor) {
         edges {
           node {

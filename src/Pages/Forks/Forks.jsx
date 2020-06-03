@@ -33,7 +33,7 @@ query getForks($cursor: String, $name: String!, $owner: String!) {
 const Forks = () => {
   const [owner, name] = Storage.local.read(REPO).split('/');
   const {
-    data, loading, error, fetchMore,
+    data, loading, error,
   } = useQuery(GET_FORKS, { variables: { name, owner } });
 
   const tableKeys = [

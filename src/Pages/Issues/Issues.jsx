@@ -38,7 +38,7 @@ query getIssues($cursor: String, $name: String!, $owner: String!) {
 const Issues = () => {
   const [owner, name] = Storage.local.read(REPO).split('/');
   const {
-    data, loading, error, fetchMore,
+    data, loading, error,
   } = useQuery(GET_ISSUES, { variables: { name, owner } });
   const tableKeys = [
     { header: 'id', path: 'id' },

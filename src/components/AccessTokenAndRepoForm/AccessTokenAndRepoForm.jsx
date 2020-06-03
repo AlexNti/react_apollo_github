@@ -4,9 +4,10 @@ import { useLazyQuery } from '@apollo/client';
 
 import RepoField from './RepoField';
 import AccessTokenField from './AccessTokenField';
+import StarField from './StarField';
 import Button from '../Button';
-import GET_REPO_INFO from '../../operations/queries/getRepoInfo';
 import Storage from '../../utils/storage';
+import GET_REPO_INFO from '../../operations/queries/getRepoInfo';
 import { REPO, ACCESS_TOKEN } from '../../constats';
 // TODO ADD VALIDATION ERROR
 // TODO ADD LABELS
@@ -24,7 +25,8 @@ const FieldsWpapper = styled('div')({
   flexDirection: 'row',
   overflow: 'hidden',
   width: '100%',
-  marginBottom: '10px',
+  marginBottom: '20px',
+  alignItems: 'center',
 });
 
 const SubmitButton = styled(Button)(({
@@ -52,10 +54,15 @@ const AccessTokenAndRepoForm = () => {
     getRepoInfo({ variables: { owner, name } });
   };
 
+
   const handleInputChange = React.useCallback((event) => {
     const { name, value } = event.target;
     setValues({ ...values, [name]: value });
   }, [values]);
+
+  const handleStarClick = (event) => {
+    event.preventDefault();
+  };
 
   const validateFields = React.useCallback(() => {
     const { repo, accessToken } = values;
@@ -86,6 +93,7 @@ const AccessTokenAndRepoForm = () => {
           error={validateFields().accessToken}
 
         />
+        <StarField onClick={handleStarClick} />
       </FieldsWpapper>
       <SubmitButton disabled={loading}>
         Load

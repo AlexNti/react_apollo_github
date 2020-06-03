@@ -41,7 +41,7 @@ query getPullRequests($cursor: String, $name: String!, $owner: String!) {
 const PullRequests = () => {
   const [owner, name] = Storage.local.read(REPO).split('/');
   const {
-    data, loading, error, fetchMore,
+    data, loading, error,
   } = useQuery(GET_PULL_REQUESTS, { variables: { name, owner } });
   const tableKeys = [
     { header: 'title', path: 'title' },
