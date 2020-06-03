@@ -85,6 +85,7 @@ const Main = () => {
 
   React.useEffect(() => {
     if (selectedTab) history.push(`/${selectedTab}`);
+    if(!data) history.push("/")
   }, [selectedTab, history]);
   React.useEffect(() => { setSelectedTab(location.pathname.substring(1)); }, [location]);
 
@@ -104,20 +105,22 @@ const Main = () => {
   return (
     <Layout>
       <Header><AccessTokenAndRepoForm /></Header>
-      <Tabs>
-        <TabItem selectedTabId={selectedTab} count={totalCountIssues} tabName="Issues" id="issues" onClick={setSelectedTab} />
-        <TabItem selectedTabId={selectedTab} count={totalCountPullRequests} tabName="Pull Request" id="pullrequests" onClick={setSelectedTab} />
-        <TabItem selectedTabId={selectedTab} count={totalCountForks} tabName="Forks" id="forks" onClick={setSelectedTab} />
-      </Tabs>
-      <GitHubContent>
+      {data && 
+        <Tabs>
+          <TabItem selectedTabId={selectedTab} count={totalCountIssues} tabName="Issues" id="issues" onClick={setSelectedTab} />
+          <TabItem selectedTabId={selectedTab} count={totalCountPullRequests} tabName="Pull Request" id="pullrequests" onClick={setSelectedTab} />
+          <TabItem selectedTabId={selectedTab} count={totalCountForks} tabName="Forks" id="forks" onClick={setSelectedTab} />
+        </Tabs>}
 
-      <Suspense fallback={<div>Loading...</div>}>
-        <Switch><Route path="/issues" component={IssuesPage} /></Switch>
-        <Switch><Route path="/pullrequests" component={PullRequestPage} /></Switch>
-        <Switch><Route path="/forks" component={ForksPage} /></Switch>
-      </Suspense>
-     
+
+      <GitHubContent>
+        <Suspense  fallback={<div>Loading...</div>}>
+          <Switch><Route path="/issues" component={IssuesPage} /></Switch>
+          <Switch><Route path="/pullrequests" component={PullRequestPage} /></Switch>
+          <Switch><Route path="/forks" component={ForksPage} /></Switch>
+        </Suspense>
       </GitHubContent>
+
     </Layout>
   );
 };
