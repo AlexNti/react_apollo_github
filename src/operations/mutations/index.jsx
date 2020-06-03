@@ -6,6 +6,7 @@ export const STAR_REPOSITORY = gql`
     addStar(input: { starrableId:$id }) {
       starrable {
         id
+        viewerHasStarred
       }
     }
   }
@@ -16,6 +17,7 @@ export const UNSTAR_REPOSITORY = gql`
     removeStar(input: { starrableId: $id }) {
       starrable {
         id
+        viewerHasStarred
       }
     }
   }
