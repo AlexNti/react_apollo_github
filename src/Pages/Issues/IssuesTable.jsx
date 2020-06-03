@@ -30,6 +30,7 @@ const renderTableRow = (tableKey, data) => {
 
 
 const IssuesTable = ({ tableKeys, data }) => (
+
   <Table>
     {tableKeys.map((tableKey) => (
       <TableColumn key={tableKey.header}>
@@ -40,6 +41,7 @@ const IssuesTable = ({ tableKeys, data }) => (
       </TableColumn>
     ))}
   </Table>
+
 );
 
 IssuesTable.defaultProps = {

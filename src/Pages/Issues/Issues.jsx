@@ -5,10 +5,11 @@ import { useQuery, gql } from '@apollo/client';
 import Table from './IssuesTable';
 import Storage from '../../utils/storage';
 import { REPO } from '../../constats';
+import LoadMoreButton from '../../components/LoadMoreButton';
 
 const GET_ISSUES = gql`
 query getRepoInfo($cursor: String, $name: String!, $owner: String!) {
-  repository(name: $name, owner: $owner) @client {
+  repository(name: $name, owner: $owner) {
     issues(first: 20, after: $cursor) {
       totalCount
       edges {
@@ -35,11 +36,12 @@ query getRepoInfo($cursor: String, $name: String!, $owner: String!) {
 }
 `;
 
-const Issues = () => {
+const Issues = (props) => {
   const [owner, name] = Storage.local.read(REPO).split('/');
   const {
-    data, loading, error,
+    data, loading, error, fetchMore,
   } = useQuery(GET_ISSUES, { variables: { name, owner } });
+
   const tableKeys = [
     { header: 'id', path: 'id' },
     { header: 'title', path: 'title' },
@@ -50,19 +52,42 @@ const Issues = () => {
     { header: 'author', path: 'author.login' }];
 
 
-  // const loadMore = () => {
-  //   const { issues } = data.repository;
-  //   const cursor = issues.pageInfo.endCursor;
-  //   fetchMore({
-  //     variables: { name: 'react', owner: 'facebook' },
-  //     updateQuery: (prev, { fetchMoreResult }) => {
-  //       if (!fetchMoreResult) return prev;
-  //       return { ...prev, feed: [...prev.feed, ...fetchMoreResult.feed] };
-  //     },
-  //   });
-  // };
+  const loadMore = () => {
+    const { issues } = data.repository;
+    const cursor = issues.pageInfo.endCursor;
 
 
-  return <Table tableKeys={tableKeys} data={data} />;
+    return fetchMore({
+      variables: { name, owner, cursor },
+      updateQuery: (previousResult, { fetchMoreResult }) => {
+        const newEdges = fetchMoreResult.repository.issues.edges;
+        const { pageInfo } = fetchMoreResult.repository.issues;
+        console.log({ previousResult, fetchMoreResult });
+        return newEdges.length
+          ? {
+            // Put the new comments at the end of the list and update `pageInfo`
+            // so we have the new `endCursor` and `hasNextPage` values
+            repository: {
+              __typename: previousResult.repository.__typename,
+              issues: {
+                __typename: previousResult.repository.issues.__typename,
+                totalCount: fetchMoreResult.repository.issues.totalCount,
+                edges:
+                [...previousResult.repository.issues.edges, ...newEdges],
+                pageInfo,
+              },
+            },
+          }
+          : previousResult;
+      },
+    });
+  };
+
+  return (
+    <>
+      <Table tableKeys={tableKeys} data={data} />
+      <LoadMoreButton onClick={loadMore}>Load More</LoadMoreButton>
+    </>
+  );
 };
 export default React.memo(Issues);

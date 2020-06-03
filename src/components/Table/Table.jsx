@@ -4,7 +4,6 @@ export const Table = styled('div')({
   display: 'flex',
   flexDirection: 'row',
   width: '100%',
-  height: '500px',
 });
 
 export const TableRow = styled('div')({
