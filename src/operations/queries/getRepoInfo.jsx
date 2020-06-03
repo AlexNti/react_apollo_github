@@ -7,6 +7,7 @@ query getRepoInfo($cursor:String $name:String! $owner:String!) {
       id
       viewerHasStarred
       pullRequests(first: 20, after: $cursor) {
+        totalCount
         edges {
           node {
             id
@@ -59,6 +60,7 @@ query getRepoInfo($cursor:String $name:String! $owner:String!) {
         }
       }
       forks(first: 20, after: $cursor) {
+        totalCount
         edges {
           node {
             id

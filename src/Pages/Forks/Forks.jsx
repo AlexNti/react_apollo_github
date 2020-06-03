@@ -8,7 +8,7 @@ import { REPO } from '../../constats';
 
 const GET_FORKS = gql`
 query getRepoInfo($cursor: String, $name: String!, $owner: String!) {
-  repository(name: $name, owner: $owner) {
+  repository(name: $name, owner: $owner) @client {
     forks(first: 20, after: $cursor) {
         edges {
           node {

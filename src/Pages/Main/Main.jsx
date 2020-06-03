@@ -55,20 +55,21 @@ const GitHubContent = styled('div')({
   marginTop: '20px',
 });
 
-const GET_TOTAL_COUNT = gql`
+const GET_TOTAL_COUNT =  gql`
 query getRepoInfo( $name: String!, $owner: String!) {
-  repository(name: $name, owner: $owner) {
+  repository(name: $name, owner: $owner) @client {
+
     issues(first: 20) {
-      totalCount 
-    }
-    forks(first: 20) {
-    totalCount
-    }
-    pullRequests(first: 20){
       totalCount
     }
+    forks(first: 20){
+      totalCount
+    }
+    pullRequests(first:20){
+      totalCount
+    }
+
   }
- 
 }
 `;
 
@@ -89,6 +90,10 @@ const Main = () => {
 
 
   if (loading) return 'Loading...';
+
+  if(error){
+    console.log(error);
+  }
 
 
   const totalCountIssues = error ? 0 : data && data.repository.issues.totalCount || 0;
